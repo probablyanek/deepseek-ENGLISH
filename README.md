@@ -1,129 +1,129 @@
-# DeepSeek V3 Free 服务
+# DeepSeek V3 Free Service
 
 [![](https://img.shields.io/github/license/llm-red-team/deepseek-free-api.svg)](LICENSE)
 ![](https://img.shields.io/github/stars/llm-red-team/deepseek-free-api.svg)
 ![](https://img.shields.io/github/forks/llm-red-team/deepseek-free-api.svg)
 ![](https://img.shields.io/docker/pulls/vinlic/deepseek-free-api.svg)
 
-支持高速流式输出、支持多轮对话、支持联网搜索、支持R1深度思考和静默深度思考，零配置部署，多路token支持。
+Supports high-speed streaming output, multi-turn dialogue, internet search, R1 deep thinking, and silent deep thinking. Zero-configuration deployment with multi-token support.
 
-与ChatGPT接口完全兼容。
+Fully compatible with ChatGPT interface.
 
-还有以下十个free-api欢迎关注：
+Also, check out the following ten free APIs:
 
-Moonshot AI（Kimi.ai）接口转API [kimi-free-api](https://github.com/LLM-Red-Team/kimi-free-api)
+Moonshot AI (Kimi.ai) interface to API [kimi-free-api](https://github.com/LLM-Red-Team/kimi-free-api)
 
-智谱AI (智谱清言) 接口转API [glm-free-api](https://github.com/LLM-Red-Team/glm-free-api)
+Zhipu AI (Zhipu Qingyan) interface to API [glm-free-api](https://github.com/LLM-Red-Team/glm-free-api)
 
-阶跃星辰 (跃问StepChat) 接口转API [step-free-api](https://github.com/LLM-Red-Team/step-free-api)
+Step Star (Yuewen StepChat) interface to API [step-free-api](https://github.com/LLM-Red-Team/step-free-api)
 
-阿里通义 (Qwen) 接口转API [qwen-free-api](https://github.com/LLM-Red-Team/qwen-free-api)
+Ali Tongyi (Qwen) interface to API [qwen-free-api](https://github.com/LLM-Red-Team/qwen-free-api)
 
-秘塔AI (Metaso) 接口转API [metaso-free-api](https://github.com/LLM-Red-Team/metaso-free-api)
+MetaSo AI (Metaso) interface to API [metaso-free-api](https://github.com/LLM-Red-Team/metaso-free-api)
 
-字节跳动（豆包）接口转API [doubao-free-api](https://github.com/LLM-Red-Team/doubao-free-api)
+ByteDance (Doubao) interface to API [doubao-free-api](https://github.com/LLM-Red-Team/doubao-free-api)
 
-字节跳动（即梦AI）接口转API [jimeng-free-api](https://github.com/LLM-Red-Team/jimeng-free-api)
+ByteDance (Jimeng AI) interface to API [jimeng-free-api](https://github.com/LLM-Red-Team/jimeng-free-api)
 
-讯飞星火（Spark）接口转API [spark-free-api](https://github.com/LLM-Red-Team/spark-free-api)
+iFlytek Spark (Spark) interface to API [spark-free-api](https://github.com/LLM-Red-Team/spark-free-api)
 
-MiniMax（海螺AI）接口转API [hailuo-free-api](https://github.com/LLM-Red-Team/hailuo-free-api)
+MiniMax (Hailuo AI) interface to API [hailuo-free-api](https://github.com/LLM-Red-Team/hailuo-free-api)
 
-聆心智能 (Emohaa) 接口转API [emohaa-free-api](https://github.com/LLM-Red-Team/emohaa-free-api)
+Emohaa AI (Emohaa) interface to API [emohaa-free-api](https://github.com/LLM-Red-Team/emohaa-free-api)
 
-## 目录
+## Table of Contents
 
-* [免责声明](#免责声明)
-* [效果示例](#效果示例)
-* [接入准备](#接入准备)
-  * [多账号接入](#多账号接入)
-* [Docker部署](#Docker部署)
-  * [Docker-compose部署](#Docker-compose部署)
-* [Render部署](#Render部署)
-* [Vercel部署](#Vercel部署)
-* [原生部署](#原生部署)
-* [推荐使用客户端](#推荐使用客户端)
-* [接口列表](#接口列表)
-  * [对话补全](#对话补全)
-  * [userToken存活检测](#userToken存活检测)
-* [注意事项](#注意事项)
-  * [Nginx反代优化](#Nginx反代优化)
-  * [Token统计](#Token统计)
+* [Disclaimer](#disclaimer)
+* [Effect Examples](#effect-examples)
+* [Preparation](#preparation)
+  * [Multi-Account Access](#multi-account-access)
+* [Docker Deployment](#docker-deployment)
+  * [Docker-compose Deployment](#docker-compose-deployment)
+* [Render Deployment](#render-deployment)
+* [Vercel Deployment](#vercel-deployment)
+* [Native Deployment](#native-deployment)
+* [Recommended Clients](#recommended-clients)
+* [API List](#api-list)
+  * [Dialogue Completion](#dialogue-completion)
+  * [userToken Survival Detection](#usertoken-survival-detection)
+* [Notes](#notes)
+  * [Nginx Reverse Proxy Optimization](#nginx-reverse-proxy-optimization)
+  * [Token Statistics](#token-statistics)
 * [Star History](#star-history)
   
-## 免责声明
+## Disclaimer
 
-**逆向API是不稳定的，建议前往DeepSeek官方 https://platform.deepseek.com/ 付费使用API，避免封禁的风险。**
+**Reverse engineering APIs is unstable. It is recommended to use the official DeepSeek API at https://platform.deepseek.com/ for paid usage to avoid the risk of being banned.**
 
-**本组织和个人不接受任何资金捐助和交易，此项目是纯粹研究交流学习性质！**
+**This organization and individuals do not accept any financial donations or transactions. This project is purely for research, exchange, and learning purposes!**
 
-**仅限自用，禁止对外提供服务或商用，避免对官方造成服务压力，否则风险自担！**
+**For personal use only. Do not provide external services or commercial use to avoid putting pressure on the official service, otherwise bear the risk yourself!**
 
-**仅限自用，禁止对外提供服务或商用，避免对官方造成服务压力，否则风险自担！**
+**For personal use only. Do not provide external services or commercial use to avoid putting pressure on the official service, otherwise bear the risk yourself!**
 
-**仅限自用，禁止对外提供服务或商用，避免对官方造成服务压力，否则风险自担！**
+**For personal use only. Do not provide external services or commercial use to avoid putting pressure on the official service, otherwise bear the risk yourself!**
 
-## 效果示例
+## Effect Examples
 
-### 验明正身Demo
+### Identity Verification Demo
 
-![验明正身](./doc/example-1.png)
+![Identity Verification](./doc/example-1.png)
 
-### 多轮对话Demo
+### Multi-turn Dialogue Demo
 
-![多轮对话](./doc/example-2.png)
+![Multi-turn Dialogue](./doc/example-2.png)
 
-### 联网搜索Demo
+### Internet Search Demo
 
-![联网搜索](./doc/example-3.png)
+![Internet Search](./doc/example-3.png)
 
-## 接入准备
+## Preparation
 
-请确保您在中国境内或者拥有中国境内的服务器，否则部署后可能因无法访问DeepSeek而无法使用。
+Ensure you are within China or have a server within China, otherwise the deployment may not be able to access DeepSeek and thus be unusable.
 
-从 [DeepSeek](https://chat.deepseek.com/) 获取userToken value
+Obtain the userToken value from [DeepSeek](https://chat.deepseek.com/)
 
-进入DeepSeek随便发起一个对话，然后F12打开开发者工具，从Application > LocalStorage中找到`userToken`中的value值，这将作为Authorization的Bearer Token值：`Authorization: Bearer TOKEN`
+Initiate any dialogue in DeepSeek, then open the developer tools with F12, and find the `userToken` value in Application > LocalStorage. This will be used as the Bearer Token value for Authorization: `Authorization: Bearer TOKEN`
 
-![获取userToken](./doc/example-0.png)
+![Obtain userToken](./doc/example-0.png)
 
-### 多账号接入
+### Multi-Account Access
 
-目前同个账号同时只能有*一路*输出，你可以通过提供多个账号的userToken value并使用`,`拼接提供：
+Currently, the same account can only have *one* output at a time. You can provide multiple account userToken values and concatenate them with `,`:
 
 `Authorization: Bearer TOKEN1,TOKEN2,TOKEN3`
 
-每次请求服务会从中挑选一个。
+Each request will select one from them.
 
-## Docker部署
+## Docker Deployment
 
-请准备一台具有公网IP的服务器并将8000端口开放。
+Prepare a server with a public IP and open port 8000.
 
-拉取镜像并启动服务
+Pull the image and start the service
 
 ```shell
 docker run -it -d --init --name deepseek-free-api -p 8000:8000 -e TZ=Asia/Shanghai vinlic/deepseek-free-api:latest
 ```
 
-查看服务实时日志
+View real-time service logs
 
 ```shell
 docker logs -f deepseek-free-api
 ```
 
-重启服务
+Restart the service
 
 ```shell
 docker restart deepseek-free-api
 ```
 
-停止服务
+Stop the service
 
 ```shell
 docker stop deepseek-free-api
 ```
 
-### Docker-compose部署
+### Docker-compose Deployment
 
 ```yaml
 version: '3'
@@ -139,24 +139,24 @@ services:
       - TZ=Asia/Shanghai
 ```
 
-### Render部署
+### Render Deployment
 
-**注意：部分部署区域可能无法连接deepseek，如容器日志出现请求超时或无法连接，请切换其他区域部署！**
-**注意：免费账户的容器实例将在一段时间不活动时自动停止运行，这会导致下次请求时遇到50秒或更长的延迟，建议查看[Render容器保活](https://github.com/LLM-Red-Team/free-api-hub/#Render%E5%AE%B9%E5%99%A8%E4%BF%9D%E6%B4%BB)**
+**Note: Some deployment regions may not be able to connect to deepseek. If container logs show request timeouts or connection failures, please switch to other regions for deployment!**
+**Note: Free account container instances will automatically stop after a period of inactivity, which may cause delays of 50 seconds or more for the next request. It is recommended to check [Render Container Keep-Alive](https://github.com/LLM-Red-Team/free-api-hub/#Render%E5%AE%B9%E5%99%A8%E4%BF%9D%E6%B4%BB)**
 
-1. fork本项目到你的github账号下。
+1. Fork this project to your GitHub account.
 
-2. 访问 [Render](https://dashboard.render.com/) 并登录你的github账号。
+2. Visit [Render](https://dashboard.render.com/) and log in with your GitHub account.
 
-3. 构建你的 Web Service（New+ -> Build and deploy from a Git repository -> Connect你fork的项目 -> 选择部署区域 -> 选择实例类型为Free -> Create Web Service）。
+3. Build your Web Service (New+ -> Build and deploy from a Git repository -> Connect your forked project -> Select deployment region -> Choose Free instance type -> Create Web Service).
 
-4. 等待构建完成后，复制分配的域名并拼接URL访问即可。
+4. After the build is complete, copy the assigned domain name and concatenate the URL to access.
 
-### Vercel部署
+### Vercel Deployment
 
-**注意：Vercel免费账户的请求响应超时时间为10秒，但接口响应通常较久，可能会遇到Vercel返回的504超时错误！**
+**Note: Vercel free account request response timeout is 10 seconds, but the interface response is usually longer, which may result in a 504 timeout error from Vercel!**
 
-请先确保安装了Node.js环境。
+Ensure you have the Node.js environment installed.
 
 ```shell
 npm i -g vercel --registry http://registry.npmmirror.com
@@ -166,103 +166,103 @@ cd deepseek-free-api
 vercel --prod
 ```
 
-## 原生部署
+## Native Deployment
 
-请准备一台具有公网IP的服务器并将8000端口开放。
+Prepare a server with a public IP and open port 8000.
 
-请先安装好Node.js环境并且配置好环境变量，确认node命令可用。
+Ensure the Node.js environment is installed and configured, and the node command is available.
 
-安装依赖
+Install dependencies
 
 ```shell
 npm i
 ```
 
-安装PM2进行进程守护
+Install PM2 for process management
 
 ```shell
 npm i -g pm2
 ```
 
-编译构建，看到dist目录就是构建完成
+Build the project, the dist directory will be created upon successful build
 
 ```shell
 npm run build
 ```
 
-启动服务
+Start the service
 
 ```shell
 pm2 start dist/index.js --name "deepseek-free-api"
 ```
 
-查看服务实时日志
+View real-time service logs
 
 ```shell
 pm2 logs deepseek-free-api
 ```
 
-重启服务
+Restart the service
 
 ```shell
 pm2 reload deepseek-free-api
 ```
 
-停止服务
+Stop the service
 
 ```shell
 pm2 stop deepseek-free-api
 ```
 
-## 推荐使用客户端
+## Recommended Clients
 
-使用以下二次开发客户端接入free-api系列项目更快更简单，支持文档/图像上传！
+Using the following secondary development clients to access the free-api series projects is faster and simpler, supporting document/image uploads!
 
-由 [Clivia](https://github.com/Yanyutin753/lobe-chat) 二次开发的LobeChat [https://github.com/Yanyutin753/lobe-chat](https://github.com/Yanyutin753/lobe-chat)
+LobeChat secondary developed by [Clivia](https://github.com/Yanyutin753/lobe-chat) [https://github.com/Yanyutin753/lobe-chat](https://github.com/Yanyutin753/lobe-chat)
 
-由 [时光@](https://github.com/SuYxh) 二次开发的ChatGPT Web [https://github.com/SuYxh/chatgpt-web-sea](https://github.com/SuYxh/chatgpt-web-sea)
+ChatGPT Web secondary developed by [时光@](https://github.com/SuYxh) [https://github.com/SuYxh/chatgpt-web-sea](https://github.com/SuYxh/chatgpt-web-sea)
 
-## 接口列表
+## API List
 
-目前支持与openai兼容的 `/v1/chat/completions` 接口，可自行使用与openai或其他兼容的客户端接入接口，或者使用 [dify](https://dify.ai/) 等线上服务接入使用。
+Currently supports the `/v1/chat/completions` interface compatible with openai. You can use openai or other compatible clients to access the interface, or use services like [dify](https://dify.ai/) to access.
 
-### 对话补全
+### Dialogue Completion
 
-对话补全接口，与openai的 [chat-completions-api](https://platform.openai.com/docs/guides/text-generation/chat-completions-api) 兼容。
+Dialogue completion interface, compatible with openai's [chat-completions-api](https://platform.openai.com/docs/guides/text-generation/chat-completions-api).
 
 **POST /v1/chat/completions**
 
-header 需要设置 Authorization 头部：
+The header needs to set the Authorization header:
 
 ```
 Authorization: Bearer [userToken value]
 ```
 
-请求数据：
+Request data:
 ```json
 {
-    // model名称
-    // 默认：deepseek
-    // 深度思考：deepseek-think 或 deepseek-r1
-    // 联网搜索：deepseek-search
-    // 静默模式（不输出思考过程或联网搜索结果）：deepseek-think-silent 或 deepseek-r1-silent 或 deepseek-search-silent
-    // 深度思考但思考过程使用<details>可折叠标签包裹（需要页面支持显示）：deepseek-think-fold 或 deepseek-r1-fold
+    // model name
+    // default: deepseek
+    // deep thinking: deepseek-think or deepseek-r1
+    // internet search: deepseek-search
+    // silent mode (no output of thinking process or internet search results): deepseek-think-silent or deepseek-r1-silent or deepseek-search-silent
+    // deep thinking but the thinking process is wrapped in <details> foldable tags (requires page support): deepseek-think-fold or deepseek-r1-fold
     "model": "deepseek",
-    // 默认多轮对话基于消息合并实现，某些场景可能导致能力下降且受单轮最大token数限制
-    // 如果您想获得原生的多轮对话体验，可以传入上一轮消息获得的id，来接续上下文
+    // default multi-turn dialogue is based on message merging, which may lead to reduced capabilities in some scenarios and is limited by the maximum token count per turn
+    // if you want to get the native multi-turn dialogue experience, you can pass the id obtained from the previous message to continue the context
     // "conversation_id": "50207e56-747e-4800-9068-c6fd618374ee@2",
     "messages": [
         {
             "role": "user",
-            "content": "你是谁？"
+            "content": "Who are you?"
         }
     ],
-    // 如果使用流式响应请设置为true，默认false
+    // set to true if using streaming response, default false
     "stream": false
 }
 ```
 
-响应数据：
+Response data:
 ```json
 {
     "id": "50207e56-747e-4800-9068-c6fd618374ee@2",
@@ -273,7 +273,7 @@ Authorization: Bearer [userToken value]
             "index": 0,
             "message": {
                 "role": "assistant",
-                "content": " 我是DeepSeek Chat，一个由深度求索公司开发的智能助手，旨在通过自然语言处理和机器学习技术来提供信息查询、对话交流和解答问题等服务。"
+                "content": " I am DeepSeek Chat, an intelligent assistant developed by DeepSeek Company, aiming to provide information query, dialogue exchange, and question answering services through natural language processing and machine learning technologies."
             },
             "finish_reason": "stop"
         }
@@ -287,48 +287,48 @@ Authorization: Bearer [userToken value]
 }
 ```
 
-### userToken存活检测
+### userToken Survival Detection
 
-检测userToken是否存活，如果存活live未true，否则为false，请不要频繁（小于10分钟）调用此接口。
+Check if the userToken is alive. If alive, live is true, otherwise false. Do not call this interface frequently (less than 10 minutes).
 
 **POST /token/check**
 
-请求数据：
+Request data:
 ```json
 {
     "token": "eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9..."
 }
 ```
 
-响应数据：
+Response data:
 ```json
 {
     "live": true
 }
 ```
 
-## 注意事项
+## Notes
 
-### Nginx反代优化
+### Nginx Reverse Proxy Optimization
 
-如果您正在使用Nginx反向代理deepseek-free-api，请添加以下配置项优化流的输出效果，优化体验感。
+If you are using Nginx to reverse proxy deepseek-free-api, add the following configuration items to optimize the streaming output effect and improve the experience.
 
 ```nginx
-# 关闭代理缓冲。当设置为off时，Nginx会立即将客户端请求发送到后端服务器，并立即将从后端服务器接收到的响应发送回客户端。
+# Turn off proxy buffering. When set to off, Nginx will immediately send client requests to the backend server and immediately send the response received from the backend server back to the client.
 proxy_buffering off;
-# 启用分块传输编码。分块传输编码允许服务器为动态生成的内容分块发送数据，而不需要预先知道内容的大小。
+# Enable chunked transfer encoding. Chunked transfer encoding allows the server to send data in chunks for dynamically generated content without needing to know the size of the content in advance.
 chunked_transfer_encoding on;
-# 开启TCP_NOPUSH，这告诉Nginx在数据包发送到客户端之前，尽可能地发送数据。这通常在sendfile使用时配合使用，可以提高网络效率。
+# Enable TCP_NOPUSH, which tells Nginx to send data as much as possible before sending packets to the client. This is usually used with sendfile to improve network efficiency.
 tcp_nopush on;
-# 开启TCP_NODELAY，这告诉Nginx不延迟发送数据，立即发送小数据包。在某些情况下，这可以减少网络的延迟。
+# Enable TCP_NODELAY, which tells Nginx not to delay sending data and to send small packets immediately. In some cases, this can reduce network latency.
 tcp_nodelay on;
-# 设置保持连接的超时时间，这里设置为120秒。如果在这段时间内，客户端和服务器之间没有进一步的通信，连接将被关闭。
+# Set the keep-alive timeout, here set to 120 seconds. If there is no further communication between the client and server within this time, the connection will be closed.
 keepalive_timeout 120;
 ```
 
-### Token统计
+### Token Statistics
 
-由于推理侧不在deepseek-free-api，因此token不可统计，将以固定数字返回。
+Since the inference side is not in deepseek-free-api, tokens cannot be counted and will return a fixed number.
 
 ## Star History
 
